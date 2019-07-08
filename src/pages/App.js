@@ -3,11 +3,11 @@ import {observable} from 'mobx'
 import {observer} from 'mobx-react'
 
 const appState = observable({count: 0})
-console.log(appState)
-appState.increment = () => {
+appState.increment = function () {
+  console.log(this)
   this.count++
 }
-appState.decrement = () => {
+appState.decrement = function () {
   this.count--
 }
 
