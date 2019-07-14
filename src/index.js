@@ -2,7 +2,7 @@ require('babel-polyfill')
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import {observable, computed, autorun} from 'mobx'
+import {observable, computed, autorun, action} from 'mobx'
 import App from './pages/App'
 
 class Store {
@@ -17,6 +17,15 @@ class Store {
   @computed get mixed() {
     return this.str + this.number
   };
+
+  @action changeMixed() {
+    this.str = 'world';
+    this.number = 30;
+  }
+
+  @action pushArray() {
+    this.array.push("c")
+  }
 }
 
 var store = new Store()
