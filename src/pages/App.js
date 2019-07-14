@@ -4,13 +4,10 @@ import {observer} from 'mobx-react'
 
 @observer
 class App extends React.PureComponent {
-
   render() {
     return (
       <>
-        {this.props.temps.map((temp) => {
-          return <div>{temp.temp}</div>
-        })}
+        {this.props.store.mixed}
       </>
     )
   }

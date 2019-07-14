@@ -2,33 +2,34 @@ require('babel-polyfill')
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import {observable, computed} from 'mobx'
+import {observable, computed, autorun} from 'mobx'
 import App from './pages/App'
 
-class Temp {
-  id = Math.random();
-  @observable unit = "C";
-  @observable tempC = 25;
+class Store {
+  @observable array = ["a", "b"];
+  @observable obj = {};
+  @observable map = new Map();
 
-  @computed get tempK() {
-    return this.tempC * (9 / 5) + 32
-  };
+  @observable str = "hello";
+  @observable number = 20;
+  @observable bool = false;
 
-  @computed get temp() {
-    if (this.unit === "C") {
-      return this.tempC + "C"
-    } else {
-      return this.tempK + "K"
-    }
+  @computed get mixed() {
+    return this.str + this.number
   };
 }
 
-const temps = observable([])
-temps.push(new Temp())
-window.temps = temps
-window.Temp = Temp
+var store = new Store()
+
+window.store = store
+
+autorun(() => {
+  console.log(store.mixed)
+})
 
 ReactDOM.render(
-  <App temps={temps} />,
+  <App
+    store={store}
+  />,
   document.getElementById('MainApp')
 )
